@@ -79,7 +79,7 @@
     }
 
     .hero {
-      background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.pexels.com/photos/1694360/pexels-photo-1694360.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800') no-repeat center center/cover;
+      background: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url('https://s21.ax1x.com/2025/11/25/pZAemW9.jpg') no-repeat center center/cover;
       height: 80vh;
       display: flex;
       align-items: center;
@@ -87,20 +87,8 @@
       text-align: center;
       color: white;
       margin-top: 70px;
-      border-radius: 0 0 30px 30px; /* 顶部圆角 */
+      border-radius: 0 0 30px 30px;
       overflow: hidden;
-    }
-    .hero h1 {
-      font-size: 4rem; /* 增大标题 */
-      margin-bottom: 1rem;
-      text-shadow: 0 4px 8px rgba(0,0,0,0.4);
-      letter-spacing: 2px;
-    }
-    .hero p {
-      font-size: 1.6rem;
-      max-width: 900px;
-      margin: 0 auto;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.4);
     }
 
     .container {
@@ -113,7 +101,7 @@
       margin-bottom: 4rem;
       background: rgba(255, 255, 255, 0.85);
       padding: 2.5rem;
-      border-radius: 20px; /* 圆角容器 */
+      border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.08);
       backdrop-filter: blur(10px);
     }
@@ -135,6 +123,7 @@
       border-radius: 3px;
     }
 
+    /* === 关键修改 1：放大左侧文字 === */
     .brand-intro {
       display: flex;
       gap: 2.5rem;
@@ -145,16 +134,25 @@
     }
     .brand-text p {
       margin-bottom: 1.2rem;
-      font-size: 1.15rem;
+      font-size: 1.35rem; /* ← 从 1.15rem 放大到 1.35rem */
       line-height: 1.8;
       color: #555;
     }
+
+    /* === 关键修改 2：限制右侧图片高度 === */
     .brand-image {
       flex: 1;
-      border-radius: 20px; /* 圆角图片容器 */
+      border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 15px 35px rgba(0,0,0,0.15);
       transition: transform 0.3s;
+      max-height: 420px; /* ← 限制最大高度 */
+    }
+    .brand-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
     .brand-image:hover {
       transform: translateY(-5px);
@@ -167,7 +165,7 @@
     }
     .product-card {
       background: rgba(255, 255, 255, 0.9);
-      border-radius: 20px; /* 圆角卡片 */
+      border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 10px 25px rgba(0,0,0,0.1);
       transition: all 0.3s ease;
@@ -209,6 +207,7 @@
       font-size: 0.95rem;
     }
 
+    /* === 关键修改 3：荣誉资质两排三列 === */
     .honors {
       text-align: center;
     }
@@ -220,34 +219,46 @@
       line-height: 1.7;
     }
     .badges {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* ← 两排三列 */
       gap: 1.8rem;
+      justify-items: center;
+    }
+    @media (max-width: 768px) {
+      .badges {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 480px) {
+      .badges {
+        grid-template-columns: 1fr;
+      }
     }
     .badge {
       background: linear-gradient(135deg, #ffffff, #f8f9fa);
       padding: 1.2rem 1.5rem;
-      border-radius: 15px; /* 圆角徽章 */
+      border-radius: 15px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      min-width: 190px;
+      min-width: 180px;
       font-weight: 500;
       color: #444;
       border: 1px solid rgba(0,0,0,0.05);
       transition: all 0.3s;
+      text-align: center;
     }
     .badge:hover {
       transform: translateY(-3px);
       box-shadow: 0 12px 25px rgba(0,0,0,0.12);
     }
 
+    /* === 关键修改 4：电话号码变红 === */
     footer {
       background: linear-gradient(135deg, #2c3e50, #34495e);
       color: #ecf0f1;
       text-align: center;
       padding: 3rem 2rem;
       margin-top: 3rem;
-      border-radius: 30px 30px 0 0; /* 底部圆角 */
+      border-radius: 30px 30px 0 0;
     }
     footer p {
       margin: 0.8rem 0;
@@ -257,10 +268,21 @@
       font-weight: bold;
       font-size: 1.2rem;
     }
+    /* 高亮招商热线 */
+    footer p:nth-child(2) {
+      color: #ff6b6b; /* 醒目红色 */
+      font-weight: bold;
+      font-size: 1.3rem;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
 
     @media (max-width: 768px) {
       .brand-intro {
         flex-direction: column;
+      }
+      .brand-image {
+        max-height: none; /* 移动端不限高 */
+        width: 100%;
       }
       .hero h1 {
         font-size: 2.8rem;
@@ -297,14 +319,7 @@
     </div>
   </header>
 
-  <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url('https://s21.ax1x.com/2025/11/25/pZAemW9.jpg') no-repeat center center/cover;">
-    <!--
-<div>
-  <h1>优贝多羊奶粉</h1>
-  <p>世界羊奶看中国 · 中国羊奶看陕西</p>
-</div>
--->
-  </section>
+  <section class="hero"></section>
 
   <section id="about" class="container">
     <h2>品牌介绍</h2>
@@ -400,18 +415,4 @@
   </footer>
 
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
