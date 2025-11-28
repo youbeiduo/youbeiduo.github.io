@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
- <!-- <title>优贝多羊奶粉 - 世界羊乳看中国，中国羊奶看陕西</title> -->
+  <title>优贝多羊奶粉 - 世界羊乳看中国，中国羊奶看陕西</title>
   <style>
     * {
       margin: 0;
@@ -21,7 +21,6 @@
       color: inherit;
     }
 
-    /* 优化：增加立体感 */
     body {
       background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
     }
@@ -44,12 +43,15 @@
       max-width: 1400px;
       margin: 0 auto;
     }
-    .logo {
-      font-size: 2.2rem; /* Logo放大 */
+
+    .logo-text {
+      font-size: 1.8rem;
       font-weight: bold;
       color: #c12c1f;
-      text-shadow: 0 2px 4px rgba(193, 44, 31, 0.2);
+      letter-spacing: 2px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
+
     .nav-links {
       display: flex;
       gap: 2.2rem;
@@ -59,9 +61,12 @@
       color: #444;
       transition: color 0.3s, transform 0.2s;
       position: relative;
+      font-size: 1.05rem;
     }
-    .nav-links a:hover {
+    .nav-links a:hover,
+    .nav-links a.active {
       color: #c12c1f;
+      font-weight: 600;
       transform: translateY(-2px);
     }
     .nav-links a::after {
@@ -74,7 +79,8 @@
       background: #c12c1f;
       transition: width 0.3s;
     }
-    .nav-links a:hover::after {
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
       width: 100%;
     }
 
@@ -89,6 +95,18 @@
       margin-top: 70px;
       border-radius: 0 0 30px 30px;
       overflow: hidden;
+    }
+    .hero h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 4px 8px rgba(0,0,0,0.4);
+      letter-spacing: 2px;
+    }
+    .hero p {
+      font-size: 1.6rem;
+      max-width: 900px;
+      margin: 0 auto;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.4);
     }
 
     .container {
@@ -123,7 +141,6 @@
       border-radius: 3px;
     }
 
-    /* === 关键修改 1：放大左侧文字 === */
     .brand-intro {
       display: flex;
       gap: 2.5rem;
@@ -134,19 +151,17 @@
     }
     .brand-text p {
       margin-bottom: 1.2rem;
-      font-size: 1.35rem; /* ← 从 1.15rem 放大到 1.35rem */
+      font-size: 1.35rem;
       line-height: 1.8;
       color: #555;
     }
-
-    /* === 关键修改 2：限制右侧图片高度 === */
     .brand-image {
       flex: 1;
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 15px 35px rgba(0,0,0,0.15);
       transition: transform 0.3s;
-      max-height: 420px; /* ← 限制最大高度 */
+      max-height: 420px;
     }
     .brand-image img {
       width: 100%;
@@ -156,6 +171,32 @@
     }
     .brand-image:hover {
       transform: translateY(-5px);
+    }
+
+    .video-section {
+      max-width: 1200px;
+      margin: 0 auto 4rem;
+      padding: 0 2rem;
+      text-align: center;
+    }
+    .video-container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 1.5rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      backdrop-filter: blur(10px);
+      display: inline-block;
+      width: 100%;
+      max-width: 900px;
+      position: relative;
+    }
+    .video-iframe {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: none;
+      border-radius: 12px;
+      overflow: hidden;
+      display: block;
     }
 
     .products {
@@ -207,22 +248,25 @@
       font-size: 0.95rem;
     }
 
-    /* === 关键修改 3：荣誉资质两排三列 === */
+    /* === 荣誉板块：水平留白 === */
     .honors {
-      text-align: center;
+      text-align: left;
     }
     .honors p {
       font-size: 1.15rem;
       color: #666;
       max-width: 800px;
-      margin: 0 auto 2rem;
+      margin: 0 auto 4rem;
       line-height: 1.7;
+      padding-right: 4rem; /* ← 水平留白 */
+      text-align: left;
     }
     .badges {
       display: grid;
-      grid-template-columns: repeat(3, 1fr); /* ← 两排三列 */
-      gap: 1.8rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.4rem;
       justify-items: center;
+      margin-left: 4rem; /* ← 左侧对齐徽章 */
     }
     @media (max-width: 768px) {
       .badges {
@@ -235,23 +279,53 @@
       }
     }
     .badge {
-      background: linear-gradient(135deg, #ffffff, #f8f9fa);
-      padding: 1.2rem 1.5rem;
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      min-width: 180px;
-      font-weight: 500;
-      color: #444;
-      border: 1px solid rgba(0,0,0,0.05);
-      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 80px;
+      width: 100%;
+      max-width: 190px;
+      background: linear-gradient(135deg, #d4af37, #f9e663, #d4af37);
+      padding: 0.8rem 0.6rem;
+      border-radius: 12px;
+      box-shadow:
+        0 4px 10px rgba(212, 175, 55, 0.4),
+        inset 0 1px 3px rgba(255,255,255,0.5),
+        inset 0 -1px 3px rgba(150, 120, 30, 0.3);
+      font-weight: bold;
+      color: #5a3e1e;
+      border: 1.5px solid #b8860b;
+      transition: all 0.3s ease;
       text-align: center;
+      font-size: 1rem;
+      letter-spacing: 0.8px;
+      position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    .badge::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s;
     }
     .badge:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+      transform: translateY(-4px) scale(1.02);
+      box-shadow:
+        0 8px 20px rgba(212, 175, 55, 0.5),
+        inset 0 2px 5px rgba(255,255,255,0.7),
+        inset 0 -2px 5px rgba(120, 90, 20, 0.4);
+      z-index: 2;
+    }
+    .badge:hover::before {
+      opacity: 1;
     }
 
-    /* === 关键修改 4：电话号码变红 === */
     footer {
       background: linear-gradient(135deg, #2c3e50, #34495e);
       color: #ecf0f1;
@@ -268,9 +342,8 @@
       font-weight: bold;
       font-size: 1.2rem;
     }
-    /* 高亮招商热线 */
     footer p:nth-child(2) {
-      color: #ff6b6b; /* 醒目红色 */
+      color: #ff6b6b;
       font-weight: bold;
       font-size: 1.3rem;
       text-shadow: 0 1px 2px rgba(0,0,0,0.3);
@@ -281,7 +354,7 @@
         flex-direction: column;
       }
       .brand-image {
-        max-height: none; /* 移动端不限高 */
+        max-height: none;
         width: 100%;
       }
       .hero h1 {
@@ -290,8 +363,8 @@
       .hero p {
         font-size: 1.3rem;
       }
-      .logo {
-        font-size: 1.8rem;
+      .logo-text {
+        font-size: 1.5rem;
       }
       .nav-links {
         gap: 1.5rem;
@@ -302,6 +375,18 @@
       h2 {
         font-size: 2rem;
       }
+      .video-section {
+        margin: 0 auto 3rem;
+      }
+      .video-container {
+        padding: 1rem;
+      }
+      .badge {
+        min-height: 70px;
+        max-width: 160px;
+        font-size: 0.95rem;
+        padding: 0.6rem 0.5rem;
+      }
     }
   </style>
 </head>
@@ -309,9 +394,10 @@
 
   <header>
     <div class="nav-container">
-      <div class="logo">优贝多</div>
+      <div class="logo-text">优贝多</div>
       <div class="nav-links">
         <a href="#about">品牌介绍</a>
+        <a href="#video">品牌视频</a>
         <a href="#products">产品中心</a>
         <a href="#honors">荣誉资质</a>
         <a href="#contact">招商合作</a>
@@ -332,6 +418,21 @@
       <div class="brand-image">
         <img src="https://s21.ax1x.com/2025/11/25/pZAe3dO.png" alt="优贝多智能化工厂">
       </div>
+    </div>
+  </section>
+
+  <!-- 视频板块 -->
+  <section id="video" class="video-section">
+    <h2>品牌视频</h2>
+    <div class="video-container">
+      <iframe 
+        src="https://player.bilibili.com/player.html?bvid=BV1soSGBiEgi&autoplay=0&loop=1&high_quality=1&as_wide=1&no_suggest=1&disable_interaction=1"
+        scrolling="no" 
+        frameborder="0" 
+        allowfullscreen="true"
+        allow="autoplay; fullscreen"
+        class="video-iframe">
+      </iframe>
     </div>
   </section>
 
@@ -395,6 +496,7 @@
     </div>
   </section>
 
+  <!-- 荣誉资质 -->
   <section id="honors" class="container">
     <h2>荣誉资质</h2>
     <p>优贝多凭借卓越品质与行业贡献，荣获多项权威认证与荣誉：</p>
@@ -413,6 +515,48 @@
     <p>全国招商热线：400-8786-839</p>
     <p>地址：陕西省西安市阎良区武屯镇黄金奶源带</p>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-links a');
+
+      window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (pageYOffset >= sectionTop - 100) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+          }
+        });
+      });
+
+      // 视频播放控制
+      const container = document.querySelector('.video-container');
+      const iframe = document.querySelector('.video-iframe');
+
+      // 阻止 iframe 内部点击
+      container.addEventListener('click', (e) => {
+        if (e.target === iframe) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      });
+
+      // 启用播放按钮
+      iframe.onload = function () {
+        iframe.contentWindow.postMessage('{"event":"play"}', '*');
+      };
+    });
+  </script>
 
 </body>
 </html>
